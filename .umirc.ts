@@ -6,56 +6,89 @@ export default defineConfig({
   model: {},
   initialState: {},
   request: {},
+  
+  // 1. ĐÃ ĐỔI TÊN HỆ THỐNG Ở ĐÂY
   layout: {
-    title: 'Hệ thống Khảo sát',
+    title: 'Quản lý Đồ án',
   },
-  // 1. CHỈNH TIẾNG VIỆT Ở ĐÂY
+  
   locale: {
     default: 'vi-VN',
     antd: true,
     baseNavigator: true,
   },
-  // 2. CHỈNH MENU Ở ĐÂY
+  
+  // 2. CẤU TRÚC MENU MỚI CHO 3 VAI TRÒ
   routes: [
     {
       path: '/user',
-      layout: false,
+      layout: false, // Tắt thanh menu ở trang đăng nhập
       routes: [{ path: '/user/login', component: './User/Login' }],
     },
-    { path: '/', redirect: '/welcome' },
+    { path: '/', redirect: '/home' },
     {
-      path: '/welcome',
+      path: '/home',
       name: 'Trang chủ',
-      icon: 'smile',
-      component: './Welcome',
+      icon: 'HomeOutlined', // Icon ngôi nhà
+      component: './Home',
     },
+    
+    // --- KHU VỰC CỦA ADMIN (Giáo vụ khoa) ---
     {
       path: '/admin',
-      name: 'Quản lý khảo sát',
-      icon: 'crown',
-      access: 'canAdmin',
+      name: 'Quản trị viên',
+      icon: 'CrownOutlined',
+      access: 'canAdmin', // Cờ phân quyền (chỉ admin mới thấy menu này)
       routes: [
         {
-          path: '/admin/list',
-          name: 'Danh sách',
-          component: './Admin/SurveyList',
+          path: '/admin/manage-users',
+          name: 'Quản lý tài khoản',
+          component: './Admin/ManageUsers',
         },
         {
-          path: '/admin/create',
-          name: 'Tạo mới',
-          component: './Admin/CreateSurvey',
+          path: '/admin/manage-periods',
+          name: 'Đợt bảo vệ đồ án',
+          component: './Admin/ManagePeriods',
         },
       ],
     },
+    
+    // --- KHU VỰC CỦA GIẢNG VIÊN ---
     {
-      path: '/student',
-      name: 'Khu vực sinh viên',
-      icon: 'user',
+      path: '/lecturer',
+      name: 'Khu vực Giảng viên',
+      icon: 'SolutionOutlined',
+      access: 'canLecturer', // Chỉ giảng viên mới thấy
       routes: [
         {
-          path: '/student/list',
-          name: 'Khảo sát cần làm',
-          component: './Student/SurveyList',
+          path: '/lecturer/student-list',
+          name: 'Sinh viên hướng dẫn',
+          component: './Lecturer/StudentList',
+        },
+        {
+          path: '/lecturer/review-tasks',
+          name: 'Chấm điểm & Tiến độ',
+          component: './Lecturer/ReviewTasks',
+        },
+      ],
+    },
+
+    // --- KHU VỰC CỦA SINH VIÊN ---
+    {
+      path: '/student',
+      name: 'Khu vực Sinh viên',
+      icon: 'UserOutlined',
+      access: 'canStudent', // Chỉ sinh viên mới thấy
+      routes: [
+        {
+          path: '/student/propose-thesis',
+          name: 'Đăng ký đề tài',
+          component: './Student/ProposeThesis',
+        },
+        {
+          path: '/student/my-timeline',
+          name: 'Tiến độ của tôi',
+          component: './Student/MyTimeline',
         },
       ],
     },

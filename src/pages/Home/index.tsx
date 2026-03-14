@@ -1,16 +1,19 @@
-import Guide from '@/components/Guide';
-import { trim } from '@/utils/format';
 import { PageContainer } from '@ant-design/pro-components';
-import { useModel } from '@umijs/max';
-import styles from './index.less';
+import { Card, Typography } from 'antd';
+// Đã xóa import Guide và styles vì không cần thiết nữa
 
 const HomePage: React.FC = () => {
-  const { name } = useModel('global');
   return (
     <PageContainer ghost>
-      <div className={styles.container}>
-        <Guide name={trim(name)} />
-      </div>
+      <Card>
+        <Typography.Title level={2} style={{ textAlign: 'center', marginTop: 20 }}>
+          Chào mừng đến với Hệ thống Quản lý Đồ án KTHP!
+        </Typography.Title>
+        <p style={{ textAlign: 'center', fontSize: 16, color: '#666' }}>
+          Giao diện đang bị ẩn Menu vì hệ thống chưa nhận diện được quyền (Role) của bạn. <br/>
+          Hãy vào file <b>src/app.ts</b> để giả lập quyền đăng nhập nhé!
+        </p>
+      </Card>
     </PageContainer>
   );
 };

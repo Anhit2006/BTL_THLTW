@@ -53,6 +53,7 @@ declare namespace API {
     nickName?: string;
     /** email */
     email?: string;
+    role?: 'ADMIN' | 'LECTURER' | 'STUDENT';
     gender?: UserGenderEnum;
   }
 
