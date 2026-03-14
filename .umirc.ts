@@ -23,7 +23,10 @@ export default defineConfig({
     {
       path: '/user',
       layout: false, // Tắt thanh menu ở trang đăng nhập
-      routes: [{ path: '/user/login', component: './User/Login' }],
+      routes: [{ path: '/user/login', component: './User/Login' },
+               { path: '/user/register', component: './User/Register' },
+      ],
+      
     },
     { path: '/', redirect: '/home' },
     {
